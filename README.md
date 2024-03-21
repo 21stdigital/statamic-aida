@@ -79,7 +79,7 @@ class MyAltTextGenerator implements Generator
 ?>
 ```
 
-### 2. Update Configuration
+### 2. Update Configuration  
 
 Make sure, the addon's configuration file is published:
 
