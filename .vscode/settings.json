@@ -1,0 +1,10 @@
+{
+  // Enable the extension we installed
+  "laravel-pint.enable": true,
+
+  // Define the new formatting extension as the default
+  // formatter for all PHP files
+  "[php]": {
+    "editor.defaultFormatter": "open-southeners.laravel-pint"
+  }
+}

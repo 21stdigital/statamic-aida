@@ -1,0 +1,85 @@
+{
+  "commit-msg": {
+    "enabled": true,
+    "actions": [
+      {
+        "//": "Make sure that commit messages follow conventional commit rules.",
+        "action": "\\Ramsey\\CaptainHook\\ValidateConventionalCommit",
+        "options": {
+          "config": {
+            "typeCase": null,
+            "types": [],
+            "scopeCase": null,
+            "scopeRequired": false,
+            "scopes": [],
+            "descriptionCase": null,
+            "descriptionEndMark": null,
+            "bodyRequired": false,
+            "bodyWrapWidth": null,
+            "requiredFooters": []
+          }
+        }
+      }
+    ]
+  },
+  "pre-push": {
+    "enabled": false,
+    "actions": []
+  },
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "//": "Lint and fix all staged files.",
+        "action": "composer lint {$STAGED_FILES|of-type:php}"
+      },
+      {
+        "//": "Add changed files back to the git stage.",
+        "action": "git add {$STAGED_FILES|of-type:php}"
+      },
+      {
+        "//": "Static Analysis of all PHP files in the project.",
+        "action": "composer analyse"
+      },
+      {
+        "//": "Run PHPUnit tests.",
+        "action": "composer test"
+      }
+    ]
+  },
+  "prepare-commit-msg": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-commit": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-merge": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-checkout": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-rewrite": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-change": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "composer install",
+        "options": {},
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
+            "args": [["composer.json", "composer.lock"]]
+          }
+        ]
+      }
+    ]
+  }
+}

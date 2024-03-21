@@ -1,0 +1,51 @@
+{
+  "autoload": {
+    "psr-4": {
+      "TFD\\AIDA\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TFD\\AIDA\\Tests\\": "tests"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "pixelfear/composer-dist-plugin": true,
+      "pestphp/pest-plugin": true,
+      "captainhook/hook-installer": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "TFD\\AIDA\\ServiceProvider"
+      ]
+    },
+    "statamic": {
+      "description": "21st digital Statamic Alt text AI generation addon",
+      "name": "21st digital Alt text AI"
+    }
+  },
+  "license": "MIT",
+  "name": "tfd/statamic-aida",
+  "require": {
+    "statamic/cms": "^4.0",
+    "openai-php/client": "^0.8.4"
+  },
+  "require-dev": {
+    "pestphp/pest": "^2.34",
+    "orchestra/testbench": "^8.22",
+    "laravel/pint": "^1.14",
+    "larastan/larastan": "^2.0",
+    "captainhook/captainhook": "^5.22",
+    "ramsey/conventional-commits": "^1.5",
+    "captainhook/hook-installer": "^1.0"
+  },
+  "scripts": {
+    "analyse": "@php vendor/bin/phpstan analyse",
+    "lint": "@php vendor/bin/pint",
+    "test": "@php -d memory_limit=-1 -d max_execution_time=0 ./vendor/bin/pest"
+  }
+}

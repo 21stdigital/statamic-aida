@@ -1,0 +1,23 @@
+name: Lint PHP code style issues
+
+on:
+  pull_request:
+    paths:
+      - "**.php"
+
+jobs:
+  lint-php-code-styling:
+    name: Lint PHP Code Styling
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Check PHP code style issues
+        uses: aglipanci/laravel-pint-action@v2
+        with:
+          testMode: true
+          verboseMode: true
