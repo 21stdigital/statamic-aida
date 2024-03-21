@@ -20,7 +20,7 @@ class ServiceProvider extends AddonServiceProvider
         ],
     ];
 
-    public function bootAddon()
+    public function bootAddon(): void
     {
         $this
             ->bootAddonConfig()
