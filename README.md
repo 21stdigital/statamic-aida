@@ -2,7 +2,7 @@
 
 [![Statamic 4.0+](https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square)](https://statamic.com)
 [![Latest Version](https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square)](https://github.com/21stdigital/statamic-aida/releases)
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests)](https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain)
+[![GitHub Test Action status](https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests)](https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain)
 
 > Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 4.
 
