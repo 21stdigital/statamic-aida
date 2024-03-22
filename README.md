@@ -84,9 +84,9 @@ To set up and customize the A.I.D.A addon, follow these steps:
 
 ### Usage
 
-- **Manual Generation:** Use the **Generate Alt Text** action in the Asset Browser to generate alt texts for selected images. This option allows you to decide whether to override existing alt texts.
+**Manual Generation:** Use the **Generate Alt Text** action in the Asset Browser to generate alt texts for selected images. This option allows you to decide whether to override existing alt texts.
 
-  ![Screenshot of Generate Alt Text action](./docs/action.png)
+![Screenshot of Generate Alt Text action](./docs/action.png)
 
 ### Customization
 
@@ -106,14 +106,14 @@ To set up and customize the A.I.D.A addon, follow these steps:
 
    class MyAltTextGenerator implements Generator
    {
-      /**
-       * @param Asset $asset
+     /**
+      * @param Asset $asset
       * @param string $language
       * @return string
       */
       public function generate($asset, $locale = 'en')
       {
-         /**
+        /**
          * Use some other service to get the alt text from the asset.
          * Depending on the service, you might have to transform the asset object
          * and use its url or base64 encoded string.
