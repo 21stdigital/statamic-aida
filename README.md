@@ -1,8 +1,22 @@
-# A.I.D.A - AI-Driven Alt-text Assistant
+<h1 align="center">
+  <a href="https://dashboard.data.mercedes-benz.com">
+    <img src="./docs/aida-logo-solo.svg" alt="Data Dashboard" width="200">
+  </a>
+  <br>
+  A.I.D.A - AI-Driven Alt-text Assistant
+</h1>
 
-[![Statamic 4.0+](https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square)](https://statamic.com)
-[![Latest Version](https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square)](https://github.com/21stdigital/statamic-aida/releases)
-[![GitHub Test Action status](https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests)](https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain)
+<p align="center">
+    <a href="https://statamic.com">
+        <img src="https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square" alt="Statamic 4.0+" />
+    </a>
+    <a href="https://github.com/21stdigital/statamic-aida/releases">
+        <img src="https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square" alt="Latest Version" />
+    </a>
+    <a href="https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain">
+        <img src="https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests" />
+    </a>
+</p>
 
 > Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 4.
 
