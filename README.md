@@ -115,8 +115,6 @@ To set up and customize the A.I.D.A addon, follow these steps:
     ?>
   ```
 
-````
-
 2. Implement the `generate` method to utilize your preferred service for generating alt texts.
 3. Update the `aida.php` configuration file to use your custom generator class.
 
@@ -141,4 +139,3 @@ To set up and customize the A.I.D.A addon, follow these steps:
 ## Credits
 
 This project is maintained by 21st digital. We appreciate the contributions from the community that help make this project better.
-````
