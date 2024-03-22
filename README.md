@@ -5,13 +5,13 @@
 </h1>
 
 <p align="center">
-  <a href="https://statamic.com">
+  <a href="https://statamic.com" style="text-decoration: none">
     <img src="https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square" alt="Statamic 4.0+" />
   </a>
-  <a href="https://github.com/21stdigital/statamic-aida/releases">
+  <a href="https://github.com/21stdigital/statamic-aida/releases" style="text-decoration: none">
     <img src="https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square" alt="Latest Version" />
   </a>
-  <a href="https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain">
+  <a href="https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain" style="text-decoration: none">
     <img src="https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests" />
   </a>
 </p>
