@@ -1,8 +1,10 @@
+<!-- statamic:hide -->
 <h1 align="center">
   <img src="./docs/aida-logo-solo.svg" alt="AIDA Logo" width="200">
   <br>
   A.I.D.A - AI-Driven Alt-text Assistant
 </h1>
+<!-- /statamic:hide -->
 
 <p align="center">
   <a href="https://statamic.com" style="text-decoration: none">
