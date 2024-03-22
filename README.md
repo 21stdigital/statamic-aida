@@ -1,21 +1,19 @@
 <h1 align="center">
-  <a href="https://dashboard.data.mercedes-benz.com">
-    <img src="./docs/aida-logo-solo.svg" alt="Data Dashboard" width="200">
-  </a>
+  <img src="./docs/aida-logo-solo.svg" alt="AIDA Logo" width="200">
   <br>
   A.I.D.A - AI-Driven Alt-text Assistant
 </h1>
 
 <p align="center">
-    <a href="https://statamic.com" style="text-decoration: none">
-        <img src="https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square" alt="Statamic 4.0+" />
-    </a>
-    <a href="https://github.com/21stdigital/statamic-aida/releases" style="text-decoration: none">
-        <img src="https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square" alt="Latest Version" />
-    </a>
-    <a href="https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain" style="text-decoration: none">
-        <img src="https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests" />
-    </a>
+  <a href="https://statamic.com" style="text-decoration: none">
+    <img src="https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square" alt="Statamic 4.0+" />
+  </a>
+  <a href="https://github.com/21stdigital/statamic-aida/releases" style="text-decoration: none">
+    <img src="https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square" alt="Latest Version" />
+  </a>
+  <a href="https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain" style="text-decoration: none">
+    <img src="https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests" />
+  </a>
 </p>
 
 > Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 4.
@@ -138,11 +136,11 @@ To set up and customize the A.I.D.A addon, follow these steps:
 use App\Generator\MyAltTextGenerator;
 
 return [
-      // ...
+   // ...
 
-      'generator' => MyAltTextGenerator::class,
+   'generator' => MyAltTextGenerator::class,
 
-      // ...
+   // ...
 ];
 
 ?>
