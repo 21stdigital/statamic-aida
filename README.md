@@ -76,62 +76,62 @@ To set up and customize the A.I.D.A addon, follow these steps:
 
 ### Customization
 
-- **Custom Generator:** You can replace the default OpenAI-based generator with your own by implementing the `TFD\AIDA\Generator\Generator` interface.
+**Custom Generator:** You can replace the default OpenAI-based generator with your own by implementing the `TFD\AIDA\Generator\Generator` interface.
 
-  1. Create a custom generator class e.g. `/app/Generator/MyAltTextGenerator.php`.
-
-  ```php
-    // app/Generator/MyAltTextGenerator.php
-
-    <?php
-
-    namespace App\Generator;
-
-    use \Statamic\Assets\Asset;
-    use TFD\AIDA\Generator\Generator;
-
-    class MyAltTextGenerator implements Generator
-    {
-        /**
-        * @param Asset $asset
-        * @param string $language
-        * @return string
-        */
-        public function generate($asset, $locale = 'en')
-        {
-            /**
-            * Use some other service to get the alt text from the asset.
-            * Depending on the service, you might have to transform the asset object
-            * and use its url or base64 encoded string.
-            */
-            $altText = SomeApi::get($asset, $locale);
-
-            return $altText;
-        }
-    }
-
-    ?>
-  ```
-
-2. Implement the `generate` method to utilize your preferred service for generating alt texts.
-3. Update the `aida.php` configuration file to use your custom generator class.
+1. Create a custom generator class e.g. `/app/Generator/MyAltTextGenerator.php`.
 
 ```php
-  // config/statamic/aida.php
+   // app/Generator/MyAltTextGenerator.php
 
-  <?php
+   <?php
 
-  use App\Generator\MyAltTextGenerator;
+   namespace App\Generator;
 
-  return [
+   use \Statamic\Assets\Asset;
+   use TFD\AIDA\Generator\Generator;
+
+   class MyAltTextGenerator implements Generator
+   {
+      /**
+       * @param Asset $asset
+      * @param string $language
+      * @return string
+      */
+      public function generate($asset, $locale = 'en')
+      {
+         /**
+         * Use some other service to get the alt text from the asset.
+         * Depending on the service, you might have to transform the asset object
+         * and use its url or base64 encoded string.
+         */
+         $altText = SomeApi::get($asset, $locale);
+
+         return $altText;
+      }
+   }
+
+   ?>
+```
+
+2.  Implement the `generate` method to utilize your preferred service for generating alt texts.
+3.  Update the `aida.php` configuration file to use your custom generator class.
+
+```php
+// config/statamic/aida.php
+
+<?php
+
+use App\Generator\MyAltTextGenerator;
+
+return [
       // ...
 
       'generator' => MyAltTextGenerator::class,
 
       // ...
-  ];
+];
 
-  ?>
+?>
 ```
 
 ## Credits
