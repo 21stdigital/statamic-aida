@@ -2,13 +2,27 @@ name: PHP Static Analysis
 
 on:
   pull_request:
-    paths:
-      - "**.php"
-      - "phpstan.neon"
 
 jobs:
+  changes:
+    name: Detect changes in PHP files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Filter changed files
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            php_files:
+              - '*.php'
+            phpstan_config:
+              - 'phpstan.neon'
+
   phpstan:
     name: PHPStan
+    needs: changes
+    if: ${{ needs.changes.outputs.php_files == 'true' || needs.changes.outputs.phpstan_config == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,4 +39,4 @@ jobs:
           composer update --no-interaction --prefer-dist
 
       - name: Run PHPStan
-        run: ./vendor/bin/phpstan # TODO: Use composer script
+        run: composer analyse

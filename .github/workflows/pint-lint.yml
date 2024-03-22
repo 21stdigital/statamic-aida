@@ -2,12 +2,25 @@ name: Lint PHP code style issues
 
 on:
   pull_request:
-    paths:
-      - "**.php"
 
 jobs:
+  changes:
+    name: Detect changes in PHP files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Filter changed files
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            php_files:
+              - '*.php'
+
   lint-php-code-styling:
     name: Lint PHP Code Styling
+    needs: changes
+    if: ${{ needs.changes.outputs.php_files == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
