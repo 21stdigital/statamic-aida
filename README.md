@@ -16,6 +16,9 @@
   <a href="https://github.com/21stdigital/statamic-aida/actions/workflows/tests.yml?query=branch%3Amain" style="text-decoration: none">
     <img src="https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests" />
   </a>
+  <a href="https://packagist.org/packages/tfd/statamic-aida">
+    <img src="http://poser.pugx.org/tfd/statamic-aida/downloads?style=flat-square" />
+  </a>
 </p>
 
 > Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 4.
