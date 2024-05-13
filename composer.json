@@ -33,7 +33,7 @@
   },
   "require": {
     "openai-php/client": "^0.8.4",
-    "statamic/cms": "^4.0"
+    "statamic/cms": "^5.0"
   },
   "require-dev": {
     "captainhook/captainhook": "^5.22",
