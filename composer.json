@@ -32,7 +32,7 @@
     "test": "@php -d memory_limit=-1 -d max_execution_time=0 ./vendor/bin/pest"
   },
   "require": {
-    "openai-php/client": "^0.8.4",
+    "openai-php/client": "^0.9.1",
     "statamic/cms": "^4.0"
   },
   "require-dev": {
