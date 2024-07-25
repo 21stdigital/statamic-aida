@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/21stdigital/statamic-aida/compare/1.0.0...2.0.0) (2024-07-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* switch to Statamic 5
+
+### Features
+
+* add support for custom open ai models ([#33](https://github.com/21stdigital/statamic-aida/issues/33)) ([b98e6f1](https://github.com/21stdigital/statamic-aida/commit/b98e6f1ae050c8b806873022a2b52d2f642ca19c))
+
 ## 1.0.0 (2024-03-22)
 
 
