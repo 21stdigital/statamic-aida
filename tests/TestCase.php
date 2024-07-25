@@ -87,7 +87,7 @@ class TestCase extends BaseTestCase
         parent::resolveApplicationConfiguration($app);
 
         $configs = [
-            'assets', 'cp', 'forms', 'routes', 'static_caching', 'sites', 'stache', 'system', 'users',
+            'assets', 'cp', 'forms', 'routes', 'static_caching', 'stache', 'system', 'users',
         ];
 
         foreach ($configs as $config) {
