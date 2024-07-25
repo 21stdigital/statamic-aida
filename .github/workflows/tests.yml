@@ -9,24 +9,27 @@ on:
 
 jobs:
   unit_tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.setup.os }}
 
     strategy:
       matrix:
-        php: [8.3]
-        laravel: [10.*, 11.*]
-        statamic: [4.*, 5.*]
-        testbench: [8.*, 9.*]
-        os: [ubuntu-latest]
-        include:
-          - laravel: 10.*
-            statamic: 4.*
-            testbench: 8.*
-          - laravel: 11.*
-            statamic: 5.*
-            testbench: 9.*
+        setup:
+          - {
+              php: 8.3,
+              laravel: "10.*",
+              statamic: "4.*",
+              testbench: "8.*",
+              os: ubuntu-latest,
+            }
+          - {
+              php: 8.3,
+              laravel: "11.*",
+              statamic: "5.*",
+              testbench: "9.*",
+              os: ubuntu-latest,
+            }
 
-    name: PHPUnit Tests - php@${{ matrix.php }} - statamic@${{ matrix.statamic }} - laravel@${{ matrix.laravel }}
+    name: PHPUnit Tests - php@${{ matrix.setup.php }} - statamic@${{ matrix.setup.statamic }} - laravel@${{ matrix.setup.laravel }}
 
     steps:
       - name: Checkout code
@@ -35,13 +38,13 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ matrix.setup.php }}
           tools: composer:v2
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "statamic/cms:${{ matrix.statamic }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.setup.laravel }}" "statamic/cms:${{ matrix.setup.statamic }}" "orchestra/testbench:${{ matrix.setup.testbench }}" --no-interaction --no-update
           composer install --no-interaction
 
       - name: Run test script
