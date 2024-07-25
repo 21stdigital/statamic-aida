@@ -4,39 +4,44 @@ on:
   pull_request:
 
 jobs:
-  changes:
-    name: Detect changes in PHP files
+  detect_changes:
+    name: Detect Changes in PHP Files
     runs-on: ubuntu-latest
 
+    outputs:
+      php_files_changed: ${{ steps.filter.outputs.php_files }}
+      phpstan_config_changed: ${{ steps.filter.outputs.phpstan_config }}
+
     steps:
-      - name: Filter changed files
+      - name: Identify Changed PHP Files
         uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
             php_files:
-              - '*.php'
+              - added|modified: '*.php'
             phpstan_config:
-              - 'phpstan.neon'
+              - added|modified: 'phpstan.neon'
 
-  phpstan:
-    name: PHPStan
-    needs: changes
-    if: ${{ needs.changes.outputs.php_files == 'true' || needs.changes.outputs.phpstan_config == 'true' }}
+  run_phpstan:
+    name: Run PHPStan Analysis
+    needs: detect_changes
+    if: ${{ needs.detect_changes.outputs.php_files_changed == 'true' || needs.detect_changes.outputs.phpstan_config_changed == 'true' }}
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup PHP
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP Environment
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3" # TODO: Überlegen; als env variable auslagern?
+          php-version: "8.3" # TODO: Consider externalizing as an env variable
           extensions: dom, curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
-      - name: Install dependencies
-        run: |
-          composer update --no-interaction --prefer-dist
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist
 
       - name: Run PHPStan
         run: composer analyse

@@ -1,35 +1,38 @@
-name: Lint PHP code style issues
+name: Lint PHP Code Style Issues
 
 on:
   pull_request:
 
 jobs:
-  changes:
-    name: Detect changes in PHP files
+  detect_php_changes:
+    name: Detect Changes in PHP Files
     runs-on: ubuntu-latest
 
+    outputs:
+      php_files_changed: ${{ steps.filter.outputs.php_files }}
+
     steps:
-      - name: Filter changed files
+      - name: Identify Changed PHP Files
         uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
             php_files:
-              - '*.php'
+              - added|modified: '*.php'
 
-  lint-php-code-styling:
+  lint_php_code:
     name: Lint PHP Code Styling
-    needs: changes
-    if: ${{ needs.changes.outputs.php_files == 'true' }}
+    needs: detect_php_changes
+    if: ${{ needs.detect_php_changes.outputs.php_files_changed == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Check PHP code style issues
+      - name: Check PHP Code Style
         uses: aglipanci/laravel-pint-action@v2
         with:
           testMode: true
