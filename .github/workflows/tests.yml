@@ -21,10 +21,10 @@ jobs:
         include:
           - laravel: 10.*
             statamic: 4.*
-            workbench: 8.*
+            testbench: 8.*
           - laravel: 11.*
             statamic: 5.*
-            workbench: 9.*
+            testbench: 9.*
 
     name: PHPUnit Tests - php@${{ matrix.php }} - statamic@${{ matrix.statamic }} - laravel@${{ matrix.laravel }}
 
