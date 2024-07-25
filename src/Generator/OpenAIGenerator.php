@@ -21,7 +21,7 @@ class OpenAIGenerator implements Generator
         $language = Locale::getDisplayName($locale, 'en');
 
         $payload = [
-            'model' => 'gpt-4-vision-preview',
+            'model' => 'gpt-4o-mini',
             'messages' => [
                 [
                     'role' => 'system',
@@ -41,7 +41,10 @@ class OpenAIGenerator implements Generator
                         ],
                         [
                             'type' => 'image_url',
-                            'image_url' => "data:{$mimeType};base64,{$encodedImage}",
+                            'image_url' => [
+                                'url' => "data:{$mimeType};base64,{$encodedImage}",
+                                'detail' => 'low',
+                            ],
                         ],
                     ],
                 ],
