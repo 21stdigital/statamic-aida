@@ -10,7 +10,7 @@ on:
 jobs:
   run_unit_tests:
     name: Run PHPUnit Tests - php@${{ matrix.setup.php }} - statamic@${{ matrix.setup.statamic }} - laravel@${{ matrix.setup.laravel }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.setup.os }}
 
     strategy:
       matrix:
