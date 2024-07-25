@@ -17,13 +17,6 @@ jobs:
         setup:
           - {
               php: "8.3",
-              laravel: "10.*",
-              statamic: "4.*",
-              testbench: "8.*",
-              os: "ubuntu-latest",
-            }
-          - {
-              php: "8.3",
               laravel: "11.*",
               statamic: "5.*",
               testbench: "9.*",

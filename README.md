@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://statamic.com" style="text-decoration: none">
-    <img src="https://img.shields.io/badge/Statamic-4.0%2B%2F5.0%2B-FF269E?style=flat-square" alt="Statamic 4.0+/5.0+" />
+    <img src="https://img.shields.io/badge/Statamic-5.0%2B-FF269E?style=flat-square" alt="Statamic 5.0+" />
   </a>
   <a href="https://github.com/21stdigital/statamic-aida/releases" style="text-decoration: none">
     <img src="https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square" alt="Latest Version" />
@@ -21,9 +21,9 @@
   </a>
 </p>
 
-> Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 4 and 5.
+> Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 5.
 
-A.I.D.A is an addon for Statamic 4 and 5 that leverages AI to automatically generate descriptive alt texts for images. By simplifying this process, A.I.D.A aids in making web content more accessible to visually impaired users, enhances SEO, and supports content in multiple languages.
+A.I.D.A is an addon for Statamic 5 that leverages AI to automatically generate descriptive alt texts for images. By simplifying this process, A.I.D.A aids in making web content more accessible to visually impaired users, enhances SEO, and supports content in multiple languages.
 
 ## Features
 
@@ -102,6 +102,117 @@ To set up and customize the A.I.D.A addon, follow these steps:
 
    With this setting enabled, every new image uploaded will automatically have an alt text generated, enhancing accessibility and SEO with minimal effort.
 
+### Example Configurations
+
+#### Single Site with no custom alt field
+
+- single site with handle `en`
+- asset alt field has default handle `alt`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   // No configuration necessary
+   'alt_field_mapping' => []
+
+];
+```
+
+#### Single Site with custom alt field
+
+- single site with handle `en`
+- asset alt field has a custom handle `my_custom_alt`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   // Custom configuration necessary due to custom alt field handle
+   'alt_field_mapping' => [
+      'en' => 'my_custom_alt'
+   ]
+
+];
+```
+
+#### Multi Site (1)
+
+- multiple sites with handles `en`, `fr`, `de`
+- assets have a custom alt field for every language
+  - `alt_en`
+  - `alt_fr`
+  - `alt_de`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   /**
+    * No configuration necessary; the addon automatically matches all availables site handles
+    * to a field `alt_<handle>`, e. g. `alt_en` or `alt_fr`.
+    */
+   'alt_field_mapping' => []
+
+];
+```
+
+#### Multi Site (2)
+
+- multiple sites with handles `en`, `fr`, `de`
+- assets have a custom alt field for every language
+  - `alt_english`
+  - `alt_french`
+  - `alt_german`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   /**
+    * Custom configuration is necessary, because the alt field handles differ from the ones the addon assumes
+    */
+   'alt_field_mapping' => [
+      'en' => 'alt_english',
+      'fr' => 'alt_french',
+      'de' => 'alt_german',
+   ]
+
+];
+```
+
+#### Multi Site (3)
+
+- multiple sites with handles `en`, `fr`, `de`
+- assets only have alt fields for a subset of languages:
+  - `alt_en`
+  - `alt_de`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   /**
+    * Custom configuration defines, for which languages the alt text is being generated.
+    */
+   'alt_field_mapping' => [
+      'en' => 'alt_en',
+      'de' => 'alt_de',
+   ]
+
+];
+```
+
 ### Updates
 
 After updating the addon, make sure to inspect the `config/aida.php` file to learn about new configuration values. You might want to add them to the published config file of your application.
@@ -147,8 +258,6 @@ After updating the addon, make sure to inspect the `config/aida.php` file to lea
          return $altText;
       }
    }
-
-   ?>
 ```
 
 2.  Implement the `generate` method to utilize your preferred service for generating alt texts.
@@ -168,8 +277,6 @@ return [
 
    // ...
 ];
-
-?>
 ```
 
 ## Credits

@@ -208,6 +208,6 @@ class TestCase extends BaseTestCase
             ],
         ];
 
-        Site::setConfig('sites', $multiSites);
+        Site::setSites($multiSites);
     }
 }
