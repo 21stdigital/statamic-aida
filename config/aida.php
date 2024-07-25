@@ -27,6 +27,48 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default configuration
+    |--------------------------------------------------------------------------
+    |
+    | Define configuration values that are used by the default OpenAIGenerator class.
+    |
+    */
+
+    'config' => [
+        /**
+         * Define the model that is used to process the images and generate alt texts.
+         *
+         * Only gpt-4 models are supported, e.g.:
+         * - gpt-4o
+         * - gpt-4o-mini
+         * - gpt-4-turbo
+         *
+         * @see https://platform.openai.com/docs/models
+         */
+        'model' => env('OPEN_AI_MODEL', 'gpt-4o-mini'),
+
+        /**
+         * The `max_tokens` parameter in OpenAI API requests limits the maximum number of tokens in the response.
+         * Tokens can be as short as one character or as long as one word (e.g., "a", "openai").
+         * Setting `max_tokens` helps control the length of the output, manage costs, and reduce latency.
+         * For example, `max_tokens=50` ensures the response does not exceed 50 tokens.
+         * Adjust the value based on the desired level of detail and brevity for your application.
+         */
+        'max_tokens' => env('OPEN_AI_MAX_TOKENS', 200),
+
+        /**
+         * By controlling the detail parameter, which has three options, low, high, or auto, you have control over
+         * how the model processes the image and generates its textual understanding. The auto setting  will look at
+         * the image input size and decide if it should use the low or high setting.
+         * Adjust the value to balance image understanding quality with performance and cost.
+         *
+         * @see https://platform.openai.com/docs/guides/vision/low-or-high-fidelity-image-understanding
+         */
+        'image_detail' => env('OPEN_AI_IMAGE_DETAIL', 'low'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Custom Queue
     |--------------------------------------------------------------------------
     |

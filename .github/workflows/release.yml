@@ -1,19 +1,20 @@
-name: Release
+name: Create Release
 
 on:
   workflow_dispatch:
 
 jobs:
-  release:
-    name: Create Release
+  create_release:
+    name: Create and Publish Release
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - name: Semantic Release
+      - name: Run Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}

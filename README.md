@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://statamic.com" style="text-decoration: none">
-    <img src="https://img.shields.io/badge/Statamic-4.0%2B-FF269E?style=flat-square" alt="Statamic 4.0+" />
+    <img src="https://img.shields.io/badge/Statamic-5.0%2B-FF269E?style=flat-square" alt="Statamic 5.0+" />
   </a>
   <a href="https://github.com/21stdigital/statamic-aida/releases" style="text-decoration: none">
     <img src="https://img.shields.io/github/v/release/21stdigital/statamic-aida?label=Release&style=flat-square" alt="Latest Version" />
@@ -17,13 +17,13 @@
     <img src="https://img.shields.io/github/actions/workflow/status/21stdigital/statamic-aida/tests.yml?branch=main&style=flat-square&label=Tests" />
   </a>
   <a href="https://packagist.org/packages/tfd/statamic-aida" style="text-decoration: none">
-    <img src="http://poser.pugx.org/tfd/statamic-aida/downloads?style=flat-square" />
+    <img src="https://img.shields.io/packagist/dt/tfd/statamic-aida?style=flat-square&label=Downloads" />
   </a>
 </p>
 
-> Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 4.
+> Enhancing web accessibility and SEO through AI-generated alt texts for Statamic 5.
 
-A.I.D.A is an addon for Statamic 4 that leverages AI to automatically generate descriptive alt texts for images. By simplifying this process, A.I.D.A aids in making web content more accessible to visually impaired users, enhances SEO, and supports content in multiple languages.
+A.I.D.A is an addon for Statamic 5 that leverages AI to automatically generate descriptive alt texts for images. By simplifying this process, A.I.D.A aids in making web content more accessible to visually impaired users, enhances SEO, and supports content in multiple languages.
 
 ## Features
 
@@ -75,7 +75,24 @@ To set up and customize the A.I.D.A addon, follow these steps:
 
    This tells A.I.D.A to use the `redis` queue connection for processing alt text generation jobs.
 
-4. **Automatic Generation on Upload:** By default, the addon does not generate alt texts automatically upon image uploads to avoid unnecessary processing. However, you can enable this feature to have alt texts generated immediately as images are uploaded.
+4. **Generator Configuration**: The default OpenAI Generator is configured with a sensible set of default values. You can adjust these values to better fit your needs.
+
+   The following options are configurable via `.env` file:
+
+   ```plaintext
+   # Define the model that is used to process the images and generate alt texts. Only gtp-4 models are supported.
+   OPEN_AI_MODEL=gpt-4o-mini
+
+   # Limit the number of tokens that are used in the response.
+   OPEN_AI_MAX_TOKENS=200
+
+   # Adjust the value to balance image understanding quality with performance and cost.
+   OPEN_AI_IMAGE_DETAIL=low
+   ```
+
+   For additional information please have a look at the `config/aida.php` file.
+
+5. **Automatic Generation on Upload:** By default, the addon does not generate alt texts automatically upon image uploads to avoid unnecessary processing. However, you can enable this feature to have alt texts generated immediately as images are uploaded.
 
    To enable automatic alt text generation on upload, add the following line to your `.env` file:
 
@@ -84,6 +101,121 @@ To set up and customize the A.I.D.A addon, follow these steps:
    ```
 
    With this setting enabled, every new image uploaded will automatically have an alt text generated, enhancing accessibility and SEO with minimal effort.
+
+### Example Configurations
+
+#### Single Site with no custom alt field
+
+- single site with handle `en`
+- asset alt field has default handle `alt`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   // No configuration necessary
+   'alt_field_mapping' => []
+
+];
+```
+
+#### Single Site with custom alt field
+
+- single site with handle `en`
+- asset alt field has a custom handle `my_custom_alt`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   // Custom configuration necessary due to custom alt field handle
+   'alt_field_mapping' => [
+      'en' => 'my_custom_alt'
+   ]
+
+];
+```
+
+#### Multi Site (1)
+
+- multiple sites with handles `en`, `fr`, `de`
+- assets have a custom alt field for every language
+  - `alt_en`
+  - `alt_fr`
+  - `alt_de`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   /**
+    * No configuration necessary; the addon automatically matches all availables site handles
+    * to a field `alt_<handle>`, e. g. `alt_en` or `alt_fr`.
+    */
+   'alt_field_mapping' => []
+
+];
+```
+
+#### Multi Site (2)
+
+- multiple sites with handles `en`, `fr`, `de`
+- assets have a custom alt field for every language
+  - `alt_english`
+  - `alt_french`
+  - `alt_german`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   /**
+    * Custom configuration is necessary, because the alt field handles differ from the ones the addon assumes
+    */
+   'alt_field_mapping' => [
+      'en' => 'alt_english',
+      'fr' => 'alt_french',
+      'de' => 'alt_german',
+   ]
+
+];
+```
+
+#### Multi Site (3)
+
+- multiple sites with handles `en`, `fr`, `de`
+- assets only have alt fields for a subset of languages:
+  - `alt_en`
+  - `alt_de`
+
+```php
+// config/statamic/aida.php
+<?php
+
+return [
+
+   /**
+    * Custom configuration defines, for which languages the alt text is being generated.
+    */
+   'alt_field_mapping' => [
+      'en' => 'alt_en',
+      'de' => 'alt_de',
+   ]
+
+];
+```
+
+### Updates
+
+After updating the addon, make sure to inspect the `config/aida.php` file to learn about new configuration values. You might want to add them to the published config file of your application.
 
 ### Usage
 
@@ -126,8 +258,6 @@ To set up and customize the A.I.D.A addon, follow these steps:
          return $altText;
       }
    }
-
-   ?>
 ```
 
 2.  Implement the `generate` method to utilize your preferred service for generating alt texts.
@@ -147,8 +277,6 @@ return [
 
    // ...
 ];
-
-?>
 ```
 
 ## Credits
