@@ -15,7 +15,7 @@ jobs:
       matrix:
         php: [8.3]
         laravel: [10.*]
-        statamic: [^4.0] # TODO: Use statamic 4.x dependencies for matrix configuration.
+        statamic: [^4.0, ^5.0]
         testbench: [8.*]
         os: [ubuntu-latest]
 

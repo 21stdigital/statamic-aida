@@ -21,7 +21,7 @@ class OpenAIGenerator implements Generator
         $language = Locale::getDisplayName($locale, 'en');
 
         $payload = [
-            'model' => 'gpt-4-vision-preview',
+            'model' => config('statamic.aida.config.model'),
             'messages' => [
                 [
                     'role' => 'system',
@@ -41,12 +41,15 @@ class OpenAIGenerator implements Generator
                         ],
                         [
                             'type' => 'image_url',
-                            'image_url' => "data:{$mimeType};base64,{$encodedImage}",
+                            'image_url' => [
+                                'url' => "data:{$mimeType};base64,{$encodedImage}",
+                                'detail' => config('statamic.aida.config.image_detail'),
+                            ],
                         ],
                     ],
                 ],
             ],
-            'max_tokens' => 200,
+            'max_tokens' => config('statamic.aida.config.max_tokens'),
         ];
 
         $response = $client->chat()->create($payload);
