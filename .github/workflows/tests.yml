@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         php: [8.3]
-        laravel: [10.*]
-        statamic: [^4.0, ^5.0]
+        laravel: [11.*]
+        statamic: [^5.0]
         testbench: [8.*]
         os: [ubuntu-latest]
 
