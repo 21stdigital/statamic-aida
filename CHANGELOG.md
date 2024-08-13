@@ -1,3 +1,10 @@
+## [2.1.0](https://github.com/21stdigital/statamic-aida/compare/2.0.0...2.1.0) (2024-08-13)
+
+
+### Features
+
+* sanitize alt text to prevent invalid html code ([#36](https://github.com/21stdigital/statamic-aida/issues/36)) ([a236d0b](https://github.com/21stdigital/statamic-aida/commit/a236d0b07ea337a3813e8e8e224e2c108998e50c))
+
 ## [2.0.0](https://github.com/21stdigital/statamic-aida/compare/1.0.0...2.0.0) (2024-07-25)
 
 
