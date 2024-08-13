@@ -19,7 +19,7 @@ jobs:
         with:
           filters: |
             php_files:
-              - added|modified: '*.php'
+              - added|modified: '**/*.php'
             phpstan_config:
               - added|modified: 'phpstan.neon'
 
