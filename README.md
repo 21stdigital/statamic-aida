@@ -255,6 +255,11 @@ After updating the addon, make sure to inspect the `config/aida.php` file to lea
          */
          $altText = SomeApi::get($asset, $locale);
 
+         /**
+          * You might want to sanitize the altText with `htmlspecialchars($altText, ENT_QUOTES, 'UTF-8')` to prevent invalid HTML code.
+          * Alternatively you can use the `sanitize` modifier in your view files.
+          */
+
          return $altText;
       }
    }

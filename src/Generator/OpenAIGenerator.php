@@ -57,6 +57,9 @@ class OpenAIGenerator implements Generator
         // TODO: The response could be incomplete, e. g. when the 'finishReason' is not 'stop', probably due to a token limitation or usage limit. These cases need to be handled.
         $result = trim($response->choices[0]->message->content);
 
-        return $result;
+        // Sanitize the result to convert special characters into HTML entities, preventing invalid HTML code.
+        $sanitizedResult = htmlspecialchars($result, ENT_QUOTES, 'UTF-8');
+
+        return $sanitizedResult;
     }
 }
