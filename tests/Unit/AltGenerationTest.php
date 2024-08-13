@@ -7,8 +7,8 @@ use TFD\AIDA\Generator\DummyGenerator;
 use TFD\AIDA\Jobs\GenerateAltTextJob;
 
 beforeEach(function () {
-    $this->generator = new DummyGenerator();
-    $this->asset = new Asset();
+    $this->generator = new DummyGenerator;
+    $this->asset = new Asset;
 });
 
 it('generates an alt text', function () {
