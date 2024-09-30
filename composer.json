@@ -41,7 +41,7 @@
     "larastan/larastan": "^2.0",
     "laravel/pint": "^1.14",
     "orchestra/testbench": "^9.0",
-    "pestphp/pest": "^2.34",
+    "pestphp/pest": "^3.2",
     "ramsey/conventional-commits": "^1.5"
   },
   "config": {
