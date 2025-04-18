@@ -19,46 +19,41 @@ class GenerateAltTextJob implements ShouldQueue
     /** @var string */
     protected $assetId;
 
-    /** @var string */
-    protected $language;
+    /** @var array */
+    protected $altFieldMappings;
 
-    /** @var string */
-    protected $altFieldName;
-
-    public function __construct(string $assetId, string $language, string $altFieldName)
+    public function __construct(string $assetId, array $altFieldMappings)
     {
         $this->assetId = $assetId;
-        $this->language = $language;
-        $this->altFieldName = $altFieldName;
+        $this->altFieldMappings = $altFieldMappings;
 
         $this->queue = config('statamic.aida.queue');
     }
 
     public function handle(Generator $generator): void
     {
-        Log::debug(sprintf(
-            'Generating alt text for "%s" in "%s" for field "%s".',
-            $this->assetId,
-            $this->language,
-            $this->altFieldName
-        ));
-
         /** @var AssetsAsset|null */
         $asset = Asset::findById($this->assetId);
+
         if ($asset === null) {
-            Log::info(sprintf(
-                'Could not generate alt text for "%s" in "%s" for field "%s", because the asset could not be found.',
-                $this->assetId,
-                $this->language,
-                $this->altFieldName
-            ));
+            Log::info("Could not generate alt text for \"{$this->assetId}\", because the asset could not be found.");
 
             return;
         }
 
-        $result = $generator->generate($asset, $this->language);
-        $asset
-            ->set($this->altFieldName, $result)
-            ->save();
+        foreach ($this->altFieldMappings as $locale => $fieldName) {
+            Log::debug(sprintf(
+                'Generating alt text for "%s" in "%s" for field "%s".',
+                $this->assetId,
+                $locale,
+                $fieldName
+            ));
+
+            $result = $generator->generate($asset, $locale);
+
+            $asset->set($fieldName, $result);
+        }
+
+        $asset->save();
     }
 }
