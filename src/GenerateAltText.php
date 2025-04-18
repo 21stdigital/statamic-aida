@@ -28,13 +28,12 @@ class GenerateAltText
     public function generate(): void
     {
         $altFieldMappings = ! empty(config('statamic.aida.alt_field_mapping')) ? config('statamic.aida.alt_field_mapping') : $this->generateDefaultAltFieldMappings();
-        foreach ($altFieldMappings as $locale => $fieldName) {
-            // Skip generation if overwriting is disabled and the asset already has an alt text
-            if (! $this->overwrite && $this->assetHasAltText($this->asset, $fieldName)) {
-                continue;
-            }
 
-            GenerateAltTextJob::dispatch($this->asset->id(), $locale, $fieldName);
+        $altFieldsToGenerate = collect($altFieldMappings)
+            ->reject(fn ($fieldName) => ! $this->overwrite && $this->assetHasAltText($this->asset, $fieldName));
+
+        if ($altFieldsToGenerate->isNotEmpty()) {
+            GenerateAltTextJob::dispatch($this->asset->id(), $altFieldsToGenerate->all());
         }
     }
 
