@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Queue;
+use Statamic\Facades\Asset as FacadesAsset;
+use TFD\AIDA\Generator\DummyGenerator;
 use TFD\AIDA\Jobs\GenerateAltTextJob;
 
 it('does not create a job by default when an asset is uploaded', function () {
@@ -27,7 +29,33 @@ it('creates a job when an asset is uploaded with configuration', function () {
     Queue::assertPushed(GenerateAltTextJob::class, 1);
 });
 
-it('creates one job per site with default alt text field settings', function () {
+it('generates an alt text for every site', function () {
+    $generator = new DummyGenerator;
+    Queue::fake();
+
+    config()->set('statamic.aida.generate_on_upload', true);
+    test()->useMultiSite();
+
+    $this->asset = test()->uploadTestImageToTestContainer();
+    $pushedJobs = Queue::pushed(GenerateAltTextJob::class);
+
+    // Actually execute the queued import job
+    $job = $pushedJobs->first();
+    $job->handle($generator);
+
+    $altTextEn = $generator->generate($this->asset, 'en');
+    $altTextDe = $generator->generate($this->asset, 'de');
+    $altTextFr = $generator->generate($this->asset, 'fr');
+
+    // After exeucting the import job, the alt text should be generated for the image.
+    $assetWithAlt = FacadesAsset::findById($this->asset->id());
+
+    expect($assetWithAlt->alt_en)->toBeString($altTextEn);
+    expect($assetWithAlt->alt_de)->toBeString($altTextDe);
+    expect($assetWithAlt->alt_fr)->toBeString($altTextFr);
+});
+
+it('creates only a single job for multiple sites', function () {
     Queue::fake();
 
     config()->set('statamic.aida.generate_on_upload', true);
@@ -37,27 +65,8 @@ it('creates one job per site with default alt text field settings', function () 
 
     $pushedJobs = Queue::pushed(GenerateAltTextJob::class);
 
-    expect($pushedJobs->count())->toBe(3);
-    Queue::pushedJobs(GenerateAltTextJob::class, 3);
-});
-
-it('creates one job per configured alt text field mapping', function () {
-    Queue::fake();
-
-    config()->set('statamic.aida.generate_on_upload', true);
-
-    config()->set('statamic.aida.alt_field_mapping', [
-        'en' => 'alt_en',
-        'de' => 'alt_de',
-        'fr' => 'alt_fr',
-    ]);
-
-    $this->asset = test()->uploadTestImageToTestContainer();
-
-    $pushedJobs = Queue::pushed(GenerateAltTextJob::class);
-
-    expect($pushedJobs->count())->toBe(3);
-    Queue::assertPushed(GenerateAltTextJob::class, 3);
+    expect($pushedJobs->count())->toBe(1);
+    Queue::pushedJobs(GenerateAltTextJob::class, 1);
 });
 
 it('does dispatch jobs for jpg, png, gif and webp images', function () {
