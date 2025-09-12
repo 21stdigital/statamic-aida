@@ -1,3 +1,10 @@
+## [2.2.0](https://github.com/21stdigital/statamic-aida/compare/2.1.1...2.2.0) (2025-09-12)
+
+
+### Features
+
+* support statamic v6 ([#47](https://github.com/21stdigital/statamic-aida/issues/47)) ([a8a8bd6](https://github.com/21stdigital/statamic-aida/commit/a8a8bd6c07b6d2ff36f22ebca590636585ad38a7))
+
 ## [2.1.1](https://github.com/21stdigital/statamic-aida/compare/2.1.0...2.1.1) (2025-07-02)
 
 
