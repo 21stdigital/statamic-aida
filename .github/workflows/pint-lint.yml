@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Identify Changed PHP Files
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
         with:
           filters: |
@@ -36,7 +36,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Check PHP Code Style
-        uses: aglipanci/laravel-pint-action@v2
+        uses: aglipanci/laravel-pint-action@36de00d5f5a8a4e12d443e01671daa12a18f4c79 # v2.6.0
         with:
           testMode: true
           verboseMode: true
