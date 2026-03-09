@@ -7,6 +7,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   run_unit_tests:
     name: Run PHPUnit Tests - php@${{ matrix.setup.php }} - statamic@${{ matrix.setup.statamic }} - laravel@${{ matrix.setup.laravel }}
