@@ -3,6 +3,9 @@ name: Lint PHP Code Style Issues
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   detect_php_changes:
     name: Detect Changes in PHP Files
