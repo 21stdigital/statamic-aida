@@ -7,6 +7,8 @@ jobs:
   create_release:
     name: Create and Publish Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout Repository
