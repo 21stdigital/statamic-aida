@@ -112,9 +112,9 @@ class GenerateAltTextAction extends Action
         });
 
         if (config('queue.default') === 'sync') {
-            return __('Succesfully generated alt texts');
+            return __('Successfully generated alt texts');
         } else {
-            return __('Succesfully added jobs to queue');
+            return __('Successfully added jobs to queue');
         }
     }
 }
