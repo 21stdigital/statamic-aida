@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -20,9 +22,23 @@ jobs:
         setup:
           - {
               php: "8.3",
-              laravel: "11.*",
+              laravel: "12.*",
               statamic: "5.*",
-              testbench: "9.*",
+              testbench: "10.*",
+              os: "ubuntu-latest",
+            }
+          - {
+              php: "8.3",
+              laravel: "12.*",
+              statamic: "6.*",
+              testbench: "10.*",
+              os: "ubuntu-latest",
+            }
+          - {
+              php: "8.4",
+              laravel: "13.*",
+              statamic: "6.*",
+              testbench: "11.*",
               os: "ubuntu-latest",
             }
 
