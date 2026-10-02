@@ -5,10 +5,11 @@ namespace TFD\AIDA\Tests;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Statamic\Addons\Manifest as AddonManifest;
 use Statamic\Assets\Asset;
 use Statamic\Assets\AssetContainer;
 use Statamic\Console\Commands\GlideClear;
-use Statamic\Extend\Manifest;
+use Statamic\Extend\Manifest as LegacyAddonManifest;
 use Statamic\Facades\Blueprint;
 use Statamic\Facades\Site;
 use Statamic\Facades\Stache;
@@ -74,7 +75,12 @@ class TestCase extends BaseTestCase
     {
         parent::getEnvironmentSetUp($app);
 
-        $app->make(Manifest::class)->manifest = [
+        // Statamic 6 moved the addon manifest from Statamic\Extend to Statamic\Addons.
+        $manifest = class_exists(AddonManifest::class)
+            ? AddonManifest::class
+            : LegacyAddonManifest::class;
+
+        $app->make($manifest)->manifest = [
             'tfd/statamic-aida' => [
                 'id' => 'tfd/statamic-aida',
                 'namespace' => 'TFD\\AIDA',

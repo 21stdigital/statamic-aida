@@ -1,3 +1,5 @@
 <?php
 
-uses(TFD\AIDA\Tests\TestCase::class)->in('.');
+use TFD\AIDA\Tests\TestCase;
+
+uses(TestCase::class)->in('.');

@@ -5,5 +5,4 @@ parameters:
     - config
   tmpDir: build/phpstan
   # checkModelProperties: true
-  checkMissingIterableValueType: true
   reportUnmatchedIgnoredErrors: false

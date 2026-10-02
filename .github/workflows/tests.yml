@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -20,9 +22,23 @@ jobs:
         setup:
           - {
               php: "8.3",
-              laravel: "11.*",
+              laravel: "12.*",
               statamic: "5.*",
-              testbench: "9.*",
+              testbench: "10.*",
+              os: "ubuntu-latest",
+            }
+          - {
+              php: "8.3",
+              laravel: "12.*",
+              statamic: "6.*",
+              testbench: "10.*",
+              os: "ubuntu-latest",
+            }
+          - {
+              php: "8.4",
+              laravel: "13.*",
+              statamic: "6.*",
+              testbench: "11.*",
               os: "ubuntu-latest",
             }
 
@@ -44,3 +60,17 @@ jobs:
 
       - name: Run PHPUnit Tests
         run: composer test
+
+  unit_tests_result:
+    name: Unit Tests
+    needs: run_unit_tests
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Matrix Result
+        run: |
+          if [ "${{ needs.run_unit_tests.result }}" != "success" ]; then
+            echo "Unit tests finished with result: ${{ needs.run_unit_tests.result }}"
+            exit 1
+          fi
