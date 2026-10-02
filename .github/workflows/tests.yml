@@ -60,3 +60,17 @@ jobs:
 
       - name: Run PHPUnit Tests
         run: composer test
+
+  unit_tests_result:
+    name: Unit Tests
+    needs: run_unit_tests
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Matrix Result
+        run: |
+          if [ "${{ needs.run_unit_tests.result }}" != "success" ]; then
+            echo "Unit tests finished with result: ${{ needs.run_unit_tests.result }}"
+            exit 1
+          fi
