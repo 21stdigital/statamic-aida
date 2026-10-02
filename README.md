@@ -250,8 +250,7 @@ After updating the addon, make sure to inspect the `config/aida.php` file to lea
       {
         /**
          * Use some other service to get the alt text from the asset.
-         * Depending on the service, you might have to transform the asset object
-         * and use its url or base64 encoded string.
+         * Depending on the service, you might have to transform the asset object and use its url or base64 encoded string.
          */
          $altText = SomeApi::get($asset, $locale);
 
